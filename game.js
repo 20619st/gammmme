@@ -118,7 +118,7 @@ const updatePlayersList = throttle(() => {
 }, THROTTLE_DELAY);
 
 // 優化的落子處理
-const handleCellClick = throttle((e) => {
+function handleCellClick(e) {
     if (!isMyTurn) return;
     
     const row = parseInt(e.target.dataset.row);
@@ -132,7 +132,7 @@ const handleCellClick = throttle((e) => {
         player: myName,
         timestamp: Date.now()
     });
-}, THROTTLE_DELAY);
+}
 
 // 監聽落子
 moves.map().on(function(move) {
@@ -152,7 +152,7 @@ function placePiece(row, col, playerName) {
     if (!cell) return;
 
     // 檢查是否已經有棋子
-    if (cell.firstChild) return;
+    if (cell.querySelector('.piece')) return;
 
     const piece = document.createElement('div');
     const isBlack = getPlayerIndex(playerName) === 0;
